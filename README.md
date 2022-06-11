@@ -15,6 +15,8 @@
   </p>
 </div>
 
+Open in your browser the [Generate conventional hostname](https://aasaam.github.io/conventional-hostname/) for generate hostname.
+
 <div>
   <p align="center">
     <img alt="aasaam software development group" width="64" src="https://raw.githubusercontent.com/aasaam/information/master/logo/aasaam.svg">

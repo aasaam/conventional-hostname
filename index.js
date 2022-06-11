@@ -48,12 +48,30 @@ new Vue({
   data: {
     snackbar: false,
     countries: window.countries,
-    Types: ["bm", "vhs", "vir", "cl"],
+    Types: [
+      {
+        key: "bm",
+        value: "Bare Metal",
+      },
+      {
+        key: "vhs",
+        value: "Virtual Machines Host(kvm)",
+      },
+      {
+        key: "vir",
+        value: "Virtual Machine",
+      },
+      {
+        key: "cl",
+        value: "Cloud",
+      },
+    ],
     GeneratedHostName: undefined,
     GenerateForm: undefined,
 
     Country: getState("Country", "IR"),
     Provider: getState("Provider", "Example"),
+    ProviderList: window.ProviderList,
     ProviderID: getState("ProviderID", "2022"),
     DataCenter: getState("DataCenter"),
     Type: getState("Type", "bm"),

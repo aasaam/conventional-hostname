@@ -61,15 +61,16 @@
                       :rules="[v => !!v || 'Item is required']"
                       required
                     ></v-select>
-                    <v-text-field
+                    <v-combobox
                       class="my-4"
-                      hint="Company/Organization that you work with them"
-                      persistent-hint
                       v-model="Provider"
-                      label="🏢 Provider"
+                      :items="ProviderList"
+                      hint="Company/Organization that you work with them"
                       :rules="[v => !!v || 'Item is required']"
-                      required
-                    ></v-text-field>
+                      persistent-hint
+                      clearable
+                      label="🏢 Provider"
+                    ></v-combobox>
                     <v-text-field
                       class="my-4"
                       hint="Identification for provider for further usage (invoices, support and etc...)"
@@ -79,19 +80,22 @@
                       :rules="[v => !!v || 'Item is required']"
                       required
                     ></v-text-field>
-                    <v-text-field
+                    <v-combobox
                       class="my-4"
-                      hint="Data center name or identifier"
-                      persistent-hint
                       v-model="DataCenter"
-                      label="📍 Data Center name"
+                      :items="ProviderList"
+                      hint="Data center name or identifier"
                       :rules="[v => !!v || 'Item is required']"
-                      required
-                    ></v-text-field>
+                      persistent-hint
+                      clearable
+                      label="📍 Data Center name"
+                    ></v-combobox>
                     <v-autocomplete
                       class="my-4"
                       v-model="Type"
-                      hint="Server type (bm: Bare Metal, vir: Virtual Machine, cl: Cloud, vhs: Dedicate Server for hosting virtual machines)"
+                      item-text="value"
+                      item-value="key"
+                      hint="Server chassis"
                       persistent-hint
                       clearable
                       :items="Types"
@@ -125,6 +129,44 @@
                     <v-btn class="my-4" color="info" @click="generate">
                       Generate
                     </v-btn>
+                    <v-simple-table class="my-4">
+                      <template v-slot:default>
+                        <thead>
+                          <tr>
+                            <th>Country</th>
+                            <th>DataCenter</th>
+                            <th>Server Type</th>
+                            <th>Provider</th>
+                            <th>Provider ID</th>
+                            <th>Rack</th>
+                            <th>Unit</th>
+                            <th>Application</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{{ Country }}</td>
+                            <td>{{ DataCenter }}</td>
+                            <td>{{ Type }}</td>
+                            <td>{{ Provider }}</td>
+                            <td>{{ ProviderID }}</td>
+                            <td>{{ Rack }}</td>
+                            <td>{{ Unit }}</td>
+                            <td v-if="Application">
+                              <v-chip
+                                v-for="(item,i) in Application"
+                                class="ma-2"
+                                :key="i"
+                                color="green"
+                                text-color="white"
+                              >
+                                {{ item }}
+                              </v-chip>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </template>
+                    </v-simple-table>
                     <div class="my-4" v-if="GeneratedHostName">
                       <v-text-field
                         readonly
@@ -146,6 +188,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script src="./countries.js"></script>
+    <script src="./providers.js"></script>
     <script src="./index.js"></script>
   </body>
 </html>
