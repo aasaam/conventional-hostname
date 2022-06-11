@@ -53,8 +53,8 @@ new Vue({
     GenerateForm: undefined,
 
     Country: getState("Country", "IR"),
-    Provider: getState("Provider"),
-    ProviderID: getState("ProviderID"),
+    Provider: getState("Provider", "Example"),
+    ProviderID: getState("ProviderID", "2022"),
     DataCenter: getState("DataCenter"),
     Type: getState("Type", "bm"),
     Rack: getState("Rack"),
