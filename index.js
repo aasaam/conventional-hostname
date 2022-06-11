@@ -42,12 +42,33 @@ const sanitize = (str) => {
 //   a: "Application",
 // };
 
+function getFlagEmoji(countryCode) {
+  const codePoints = countryCode
+    .toUpperCase()
+    .split("")
+    .map((char) => 127397 + char.charCodeAt(0));
+  return String.fromCodePoint(...codePoints);
+}
+
+const countryNameFormatter = new Intl.DisplayNames("en", {
+  type: "region",
+});
+
+const countryList = [];
+
+window.countries.forEach((code) => {
+  countryList.push({
+    key: code,
+    value: `${getFlagEmoji(code)} ${countryNameFormatter.of(code)}(${code})`,
+  });
+});
+
 new Vue({
   el: "#app",
   vuetify: new Vuetify(),
   data: {
     snackbar: false,
-    countries: window.countries,
+    Countries: countryList,
     Types: [
       {
         key: "bm",

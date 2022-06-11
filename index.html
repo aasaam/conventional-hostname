@@ -51,16 +51,18 @@
                 <v-card-text>
                   <v-form ref="GenerateForm" v-model="GenerateForm">
                     <div class="overline">Server Information</div>
-                    <v-select
+                    <v-autocomplete
                       class="my-4"
-                      hint="ISO 3166-1 alpha-2 of Country"
-                      persistent-hint
                       v-model="Country"
-                      :items="countries"
+                      item-text="value"
+                      item-value="key"
                       label="🚩 Country"
+                      persistent-hint
+                      clearable
+                      :items="Countries"
                       :rules="[v => !!v || 'Item is required']"
                       required
-                    ></v-select>
+                    ></v-autocomplete>
                     <v-combobox
                       class="my-4"
                       v-model="Provider"
