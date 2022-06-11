@@ -1,6 +1,6 @@
 <div align="center">
   <h1>
-    Generate conventional hostname
+    Conventional hostname
   </h1>
   <p>
     generate hostname that makes sense
