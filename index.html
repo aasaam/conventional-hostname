@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      Generate conventional hostname | aasaam software development group
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="https://cdn.jsdelivr.net/gh/aasaam/information/logo/icons/favicon-32.png"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app" style="display: none">
+      <v-app>
+        <v-snackbar v-model="snackbar" timeout="3000">
+          Copied to clipboard
+          <template v-slot:action="{ attrs }">
+            <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
+              Close
+            </v-btn>
+          </template>
+        </v-snackbar>
+        <v-app-bar app color="blue-grey darken-4" dark>
+          <v-toolbar-title>Generate conventional hostname</v-toolbar-title>
+        </v-app-bar>
+        <v-main>
+          <v-container fluid>
+            <v-col class="mb-8" cols="12">
+              <v-card elevation="0">
+                <v-card-title> Generate </v-card-title>
+                <v-card-text>
+                  <v-form ref="GenerateForm" v-model="GenerateForm">
+                    <div class="overline">Server Information</div>
+                    <v-select
+                      class="my-4"
+                      hint="ISO 3166-1 alpha-2 of Country"
+                      persistent-hint
+                      v-model="Country"
+                      :items="countries"
+                      label="🚩 Country"
+                      :rules="[v => !!v || 'Item is required']"
+                      required
+                    ></v-select>
+                    <v-text-field
+                      class="my-4"
+                      hint="Company/Organization that you work with them"
+                      persistent-hint
+                      v-model="Provider"
+                      label="🏢 Provider"
+                      :rules="[v => !!v || 'Item is required']"
+                      required
+                    ></v-text-field>
+                    <v-text-field
+                      class="my-4"
+                      hint="Identification for provider for further usage (invoices, support and etc...)"
+                      persistent-hint
+                      v-model="ProviderID"
+                      label="🧾 Provider ID"
+                      :rules="[v => !!v || 'Item is required']"
+                      required
+                    ></v-text-field>
+                    <v-text-field
+                      class="my-4"
+                      hint="Data center name or identifier"
+                      persistent-hint
+                      v-model="DataCenter"
+                      label="📍 Data Center name"
+                      :rules="[v => !!v || 'Item is required']"
+                      required
+                    ></v-text-field>
+                    <v-autocomplete
+                      class="my-4"
+                      v-model="Type"
+                      hint="Server type (bm: Bare Metal, vir: Virtual Machine, cl: Cloud, vhs: Dedicate Server for hosting virtual machines)"
+                      persistent-hint
+                      clearable
+                      :items="Types"
+                      label="🧰 Server type"
+                    ></v-autocomplete>
+                    <v-text-field
+                      class="my-4"
+                      hint="Rack name or identifier"
+                      persistent-hint
+                      v-model="Rack"
+                      label="🪜 Rack"
+                    ></v-text-field>
+                    <v-text-field
+                      class="my-4"
+                      hint="Unit name or identifier"
+                      persistent-hint
+                      v-model="Unit"
+                      label="↕️ Unit"
+                    ></v-text-field>
+                    <v-combobox
+                      class="my-4"
+                      hint="List of application abbreviation name (mysql: mys, oracle: orc, Storage 0 Ceph Monitor 0: st0cm0)"
+                      persistent-hint
+                      clearable
+                      deletable-chips
+                      label="❓ Applications"
+                      multiple
+                      small-chips
+                      v-model="Application"
+                    ></v-combobox>
+                    <v-btn class="my-4" color="info" @click="generate">
+                      Generate
+                    </v-btn>
+                    <div class="my-4" v-if="GeneratedHostName">
+                      <v-text-field
+                        readonly
+                        v-model="GeneratedHostName"
+                        label="Conventional host name"
+                      ></v-text-field>
+                      <v-btn color="secondary" @click="copy">
+                        Copy to clipboard
+                      </v-btn>
+                    </div>
+                  </v-form>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-container>
+        </v-main>
+      </v-app>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script src="./countries.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
