@@ -58,7 +58,6 @@
                       item-value="key"
                       label="🚩 Country"
                       persistent-hint
-                      clearable
                       :items="Countries"
                       :rules="[v => !!v || 'Item is required']"
                       required
@@ -69,8 +68,8 @@
                       :items="ProviderList"
                       hint="Company/Organization that you work with them"
                       :rules="[v => !!v || 'Item is required']"
+                      required
                       persistent-hint
-                      clearable
                       label="🏢 Provider"
                     ></v-combobox>
                     <v-text-field
@@ -88,6 +87,7 @@
                       :items="ProviderList"
                       hint="Data center name or identifier"
                       :rules="[v => !!v || 'Item is required']"
+                      required
                       persistent-hint
                       clearable
                       label="📍 Data Center name"
@@ -99,7 +99,6 @@
                       item-value="key"
                       hint="Server chassis"
                       persistent-hint
-                      clearable
                       :items="Types"
                       label="🧰 Server type"
                     ></v-autocomplete>
