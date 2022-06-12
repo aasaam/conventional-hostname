@@ -75,8 +75,8 @@ new Vue({
         value: "Bare Metal",
       },
       {
-        key: "vhs",
-        value: "Virtual Machines Host(kvm)",
+        key: "vmh",
+        value: "Virtual Machines Host(kvm, esx, lxd, lxc and...)",
       },
       {
         key: "vir",
@@ -86,45 +86,60 @@ new Vue({
         key: "cl",
         value: "Cloud",
       },
+      {
+        key: "nsf",
+        value: "Not specified",
+      },
     ],
     GeneratedHostName: undefined,
     GenerateForm: undefined,
-
-    Country: getState("Country", "IR"),
-    Provider: getState("Provider", "Example"),
     ProviderList: window.ProviderList,
-    ProviderID: getState("ProviderID", "2022"),
-    DataCenter: getState("DataCenter"),
-    Type: getState("Type", "bm"),
+
+    Country: getState("Country", "US"),
+    Provider: getState("Provider", "Amazon"),
+    ProviderID: getState("ProviderID", "ip-12-34-56-78"),
+    DataCenter: getState("DataCenter", "West-2"),
+    Type: getState("Type", "cl"),
     Rack: getState("Rack"),
     Unit: getState("Unit"),
-    Application: getState("Application", ["misc"]),
+    Application: getState("Application", ["nginx"]),
   },
   mounted() {
     document.querySelector("#app").style.display = "block";
+    this.generate();
   },
   methods: {
     copy() {
       navigator.clipboard.writeText(this.GeneratedHostName);
       this.snackbar = true;
     },
+    clear() {
+      if (window.confirm("Are you sure?")) {
+        localStorage.clear();
+        window.location.reload();
+      }
+    },
     async generate() {
       const isValid = this.$refs.GenerateForm.validate();
       if (!isValid) {
         return;
       }
+
       const GeneratedHostName = [
         this.Country.toLowerCase(),
         `${sanitize(this.DataCenter)}-${sanitize(this.Type)}-${sanitize(
           this.Provider
         )}-${sanitize(this.ProviderID)}`,
       ];
+
       if (this.Rack) {
         GeneratedHostName.push(`r-${sanitize(this.Rack)}`);
       }
+
       if (this.Unit) {
         GeneratedHostName.push(`u-${sanitize(this.Unit)}`);
       }
+
       if (this.Application.length) {
         GeneratedHostName.push(
           `a-${this.Application.map((i) => sanitize(i))

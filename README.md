@@ -15,7 +15,7 @@
   </p>
 </div>
 
-Open in your browser the [Generate conventional hostname](https://aasaam.github.io/conventional-hostname/) for generate hostname.
+Open [Generate conventional hostname](https://aasaam.github.io/conventional-hostname/) for generate hostname.
 
 <div>
   <p align="center">

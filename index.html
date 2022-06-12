@@ -61,7 +61,18 @@
                       :items="Countries"
                       :rules="[v => !!v || 'Item is required']"
                       required
+                      @change="generate"
                     ></v-autocomplete>
+                    <v-alert type="info">
+                      Provider is reseller of actual data center, many data
+                      centers dont provide service to end users directly, you as
+                      customer contact to provider instead of Data Center tech
+                      members.
+                      <br />
+                      <strong>Provider ID</strong> is actual your service
+                      identifier in profiler panel for tracking invoice or
+                      technical support.
+                    </v-alert>
                     <v-combobox
                       class="my-4"
                       v-model="Provider"
@@ -71,6 +82,7 @@
                       required
                       persistent-hint
                       label="🏢 Provider"
+                      @change="generate"
                     ></v-combobox>
                     <v-text-field
                       class="my-4"
@@ -80,7 +92,13 @@
                       label="🧾 Provider ID"
                       :rules="[v => !!v || 'Item is required']"
                       required
+                      @change="generate"
                     ></v-text-field>
+                    <v-alert type="info">
+                      Data center is actual psychical place that your server
+                      stored. So for troubleshooting disaster data center like
+                      power failure or network disaster this name is required.
+                    </v-alert>
                     <v-combobox
                       class="my-4"
                       v-model="DataCenter"
@@ -91,6 +109,7 @@
                       persistent-hint
                       clearable
                       label="📍 Data Center name"
+                      @change="generate"
                     ></v-combobox>
                     <v-autocomplete
                       class="my-4"
@@ -101,6 +120,7 @@
                       persistent-hint
                       :items="Types"
                       label="🧰 Server type"
+                      @change="generate"
                     ></v-autocomplete>
                     <v-text-field
                       class="my-4"
@@ -108,6 +128,7 @@
                       persistent-hint
                       v-model="Rack"
                       label="🪜 Rack"
+                      @change="generate"
                     ></v-text-field>
                     <v-text-field
                       class="my-4"
@@ -115,6 +136,7 @@
                       persistent-hint
                       v-model="Unit"
                       label="↕️ Unit"
+                      @change="generate"
                     ></v-text-field>
                     <v-combobox
                       class="my-4"
@@ -126,10 +148,8 @@
                       multiple
                       small-chips
                       v-model="Application"
+                      @change="generate"
                     ></v-combobox>
-                    <v-btn class="my-4" color="info" @click="generate">
-                      Generate
-                    </v-btn>
                     <v-simple-table class="my-4">
                       <template v-slot:default>
                         <thead>
@@ -168,16 +188,17 @@
                         </tbody>
                       </template>
                     </v-simple-table>
-                    <div class="my-4" v-if="GeneratedHostName">
-                      <v-text-field
-                        readonly
-                        v-model="GeneratedHostName"
-                        label="Conventional host name"
-                      ></v-text-field>
-                      <v-btn color="secondary" @click="copy">
-                        Copy to clipboard
-                      </v-btn>
-                    </div>
+                    <v-text-field
+                      readonly
+                      v-model="GeneratedHostName"
+                      label="Conventional host name"
+                    ></v-text-field>
+                    <v-btn color="secondary" @click="copy">
+                      Copy to clipboard
+                    </v-btn>
+                    <v-btn class="red darken-4 white--text" @click="clear">
+                      Clear cache data
+                    </v-btn>
                   </v-form>
                 </v-card-text>
               </v-card>

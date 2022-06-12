@@ -1,4 +1,12 @@
 window.ProviderList = [
+  // world
+  "Amazon",
+  "Azure",
+  "Google",
+  "OVH",
+  "Digital Ocean",
+  "Hetzner",
+
   // iran
   "Sindad",
   "AvaBarid",
@@ -15,12 +23,4 @@ window.ProviderList = [
   "Iran Server",
   "Iran Host",
   "Host Iran",
-
-  // world
-  "Hetzner",
-  "OVH",
-  "Azure",
-  "Amazon",
-  "Google",
-  "Digital Ocean",
 ];
