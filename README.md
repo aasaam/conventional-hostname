@@ -3,7 +3,7 @@
     Conventional hostname
   </h1>
   <p>
-    generate hostname that makes sense
+    Generate hostname that makes sense
   </p>
   <p>
     <a href="https://github.com/aasaam/conventional-hostname/actions/workflows/pages/pages-build-deployment" target="_blank">
